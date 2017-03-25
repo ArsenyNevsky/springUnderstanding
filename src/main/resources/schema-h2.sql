@@ -1,0 +1,11 @@
+CREATE TABLE Person (
+  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  firstname VARCHAR(30)
+);
+
+CREATE TABLE Phone (
+  id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  number VARCHAR(12),
+  person_id INT,
+  FOREIGN KEY (person_id) REFERENCES Person(id)
+);
