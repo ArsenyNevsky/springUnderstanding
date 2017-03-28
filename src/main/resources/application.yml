@@ -1,0 +1,41 @@
+---
+#DEVELOPMENT
+spring:
+  profiles:
+    - dev
+  server:
+    port: 8080
+  debug: true
+  datasource:
+    url: jdbc:h2:mem:hibernateTestDB
+    username: sa
+    password:
+    platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+---
+#PRODUCTION
+spring:
+  profiles:
+    - production
+  server:
+    port: 8081
+  debug: true
+  datasource:
+    url: jdbc:h2:mem:hibernateTestDB
+    username: sa
+    password: sa
+    platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  h2:
+    console:
+      enabled: true

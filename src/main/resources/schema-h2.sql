@@ -1,4 +1,4 @@
-/*CREATE TABLE Person (
+CREATE TABLE Person (
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   firstname VARCHAR(30)
 );
@@ -29,4 +29,3 @@ CREATE TABLE DEBITACCOUNT (
   overdraft_fee INT,
   FOREIGN KEY(id) REFERENCES Account(id)
 );
-*/
