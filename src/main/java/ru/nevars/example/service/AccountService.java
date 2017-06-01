@@ -1,6 +1,7 @@
 package ru.nevars.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,12 +12,15 @@ import ru.nevars.example.entity.DebitAccount;
 import ru.nevars.example.repository.AccountRepository;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(value = "/",
         produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE},
         consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
-public class AccountService {
+public class AccountService implements ApplicationListener<PersonEvent> {
+
+    private static final Logger logger = Logger.getLogger(AccountService.class.getName());
 
     @Autowired
     private AccountRepository accountRepository;
@@ -41,6 +45,13 @@ public class AccountService {
 
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     public Collection<Account> getAccounts() {
-        return accountRepository.findAll();
+        Collection<Account> accounts = accountRepository.findAll();
+        logger.info("The size of collection = " + accounts.size());
+        return accounts;
+    }
+
+    @Override
+    public void onApplicationEvent(PersonEvent personEvent) {
+        logger.info("RECEIVED: " + personEvent);
     }
 }

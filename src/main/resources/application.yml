@@ -18,7 +18,16 @@ spring:
   h2:
     console:
       enabled: true
-
+  output:
+      ansi:
+        enabled: always
+  logging:
+    file: logs/hibernateTest.log
+    level:
+      - org.springframework.web: error
+      - org.hibernate: error
+server:
+  servlet-path: /test/
 ---
 #PRODUCTION
 spring:
